@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('components/header'); -%>
+</head>
+
+<body>
+    <div id="resultsDiv">
+        <h1>My Liked Books:</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Dislike</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%if(data && data.length>0){%>
+                    <% data.forEach(item=> { %>
+                        <tr>
+                            <td>
+                                <img src="<%=item.image_url %>"" 
+                                    width=" 50" height="60">
+                            </td>
+                            <td>
+                                <%= item.id %>
+                            </td>
+                            <td>
+                                <%= item.title %>
+                            </td>
+                            <td>
+                                <%= item.description %>
+                            </td>
+                            <td>
+                                <form action="/unfavoriteBook" method="post">
+                                    <input type="hidden" id="bookId" name="bookId" value="<%=item.id%>"><br>
+                                    <input type="submit" name="dislike" value="dislike" />
+                                </form>
+                            </td>
+                        </tr>
+                        <% }); %>
+                            <% }; %>
+            </tbody>
+        </table>
+
+</body>
+
+</html>

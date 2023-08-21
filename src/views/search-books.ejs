@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('components/header'); -%>
+</head>
+
+<body>
+
+    <form id="searchForm" action="/searchBooks" method="POST">
+        <input type="text" name="bookName" id="bookName" class="form-control input-sm"
+            placeholder="Enter the book name">
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+    <div id="resultsDiv">
+        <h1>Search Results</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Favorite</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <%if(data){%>
+                    <% data.forEach(item=> { %>
+                        <tr>
+                            <td>
+                                <img src="<%=item.volumeInfo.imageLinks.smallThumbnail %>"" 
+                                    width=" 50" height="60">
+                            </td>
+                            <td>
+                                <%= item.id %>
+                            </td>
+                            <td>
+                                <%= item.volumeInfo.title %>
+                            </td>
+                            <td>
+                                <%= item.volumeInfo.description %>
+                            </td>
+                            <td>
+                                <form action="/favoriteBook" method="post">
+                                    <input type="hidden" id="id" name="id" value=" <%= item.id %>"><br>
+                                    <input type="hidden" id="title" name="title"
+                                        value=" <%= item.volumeInfo.title %>"><br>
+                                    <input type="hidden" id="description" name="description"
+                                        value=" <%= item.volumeInfo.description %>"><br>
+                                    <input type="hidden" id="image_url" name="image_url"
+                                        value=" <%= item.volumeInfo.imageLinks.smallThumbnail %>"><br>
+                                    <input type="submit" name="favorite" class="btn btn-success" value="favorite" />
+                                </form>
+                            </td>
+                        </tr>
+                        <% }); %>
+                            <% }; %>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

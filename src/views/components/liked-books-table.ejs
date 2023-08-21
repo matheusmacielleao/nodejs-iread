@@ -1,0 +1,46 @@
+<div id="resultsDiv">
+
+    <h1>Search Results:</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Dislike</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%if(data){%>
+                <% data.forEach(item=> { %>
+                    <tr>
+                        <td>
+                            <img src="<%=item.volumeInfo.imageLinks.smallThumbnail %>"" 
+                                width=" 500" height="600">
+                        </td>
+                        <td>
+                            <%= item.id %>
+                        </td>
+                        <td>
+                            <%= item.volumeInfo.title %>
+                        </td>
+                        <td>
+                            <%= item.volumeInfo.description %>
+                        </td>
+                        <td>
+                            <form action="" method="delete">
+                                <input type="text" id="id" name="id" value=" <%= item.id %>"><br>
+                                <input type="text" id="title" name="title" value=" <%= item.volumeInfo.title %>"><br>
+                                <input type="text" id="description" name="description"
+                                    value=" <%= item.volumeInfo.description %>"><br>
+                                <input type="text" id="img_url" name="img_url"
+                                    value=" <%= item.volumeInfo.smallThumbnail %>"><br>
+                                <input type="submit" name="like" value="like" />
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+                        <% }; %>
+        </tbody>
+    </table>
